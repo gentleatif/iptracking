@@ -7,7 +7,10 @@ const IPSTACK_API_KEY = 'd9711815ca3d9972bb0fda2a9811ed91';
 app.get('/ip-info', async (req, res) => {
   try {
     const ipAddress =
-      req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+      req.headers['x-forwarded-for'] ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress;
 
     console.log('ipAddress: ', ipAddress);
     //  req.connection is deprecated, so we use alter

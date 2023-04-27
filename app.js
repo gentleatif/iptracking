@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const app = express();
-const ip = require("ip");
+const ip = require("request-ip");
 app.set("trust proxy", true); // trust first proxy
 
 const IPSTACK_API_KEY = "d9711815ca3d9972bb0fda2a9811ed91";
@@ -9,8 +9,7 @@ const IPSTACK_API_KEY = "d9711815ca3d9972bb0fda2a9811ed91";
 app.get("/ip-info", async (req, res) => {
   try {
     // extract IPv4 address only
-    console.log("ip", ip.address());
-    const ipaddress = ip.address();
+    const ipaddress = ip.getClientIp(req);
 
     const ipInfoResponse = await axios.get(
       `https://api.ipstack.com/${ipaddress}?access_key=${IPSTACK_API_KEY}`

@@ -16,6 +16,7 @@
     "ip": "^1.1.8",
     "ipware": "^2.0.0",
     "nodemon": "^2.0.22",
-    "nodmeon": "^0.0.1-security"
+    "nodmeon": "^0.0.1-security",
+    "request-ip": "^3.3.0"
   }
 }

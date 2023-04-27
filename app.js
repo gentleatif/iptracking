@@ -8,7 +8,11 @@ const IPSTACK_API_KEY = "d9711815ca3d9972bb0fda2a9811ed91";
 app.get("/ip-info", async (req, res) => {
   try {
     // extract IPv4 address only
-    const ipaddress = ip.getClientIp(req);
+    // const ipaddress = ip.getClientIp(req);
+    const ipaddress =
+      req.headers["x-forwarded-for"]?.split(",")[0].trim() ||
+      req.socket.remoteAddress;
+
     console.log("ipaddress ->", ipaddress);
 
     const ipInfoResponse = await axios.get(
